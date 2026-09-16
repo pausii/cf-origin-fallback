@@ -1,0 +1,17 @@
+{
+    "name": "cf-origin-fallback",
+    "version": "1.0.0",
+    "description": "Cloudflare Worker that serves the last good copy of a page from KV when the origin goes down",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "@cloudflare/workers-types": "^5.20260915.1",
+        "typescript": "^5.4.0",
+        "wrangler": "^4.131.2"
+    },
+    "scripts": {
+        "dev": "wrangler dev",
+        "tail": "wrangler tail",
+        "deploy": "wrangler deploy"
+    }
+}

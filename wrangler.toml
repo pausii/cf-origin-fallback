@@ -1,0 +1,37 @@
+name = "cf-origin-fallback"
+main = "src/main.ts"
+compatibility_date = "2025-10-10"
+
+[vars]
+# Ekstensi yang tidak di-cache (dipisah koma)
+IGNORED_EXTENSIONS = ".jpg,.jpeg,.png,.gif,.webp,.svg,.ico,.mp4,.mp3,.pdf,.zip,.rar,.7z,.woff,.woff2,.ttf"
+
+# Path prefix yang dilewatkan langsung ke origin tanpa diproses Worker (dipisah koma)
+BYPASS_PATHS = "/admin,/clientarea,/api/service"
+
+# Batas ukuran body yang disimpan ke KV (byte); 2097152 = 2MB
+MAX_BODY_SIZE = "2097152"
+CACHE_PREFIX = "__CACHE_DATA_"
+HASH_PREFIX = "__CACHE_HASH_"
+CACHE_STATUS_KEY = "__CACHE_STATUS_78XUN81YP"
+
+# "true" = query string diabaikan saat membentuk cache key (/produk?x=1 dan /produk sama).
+# Set "false" jika isi halaman bergantung pada query string.
+STRIP_QUERY = "true"
+
+# PASSWORD_ACCESS adalah secret.
+#   lokal     : isi di .dev.vars (lihat .dev.vars.example)
+#   production: wrangler secret put PASSWORD_ACCESS
+
+# wrangler.toml (wrangler v3.88.0^)
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+
+[[kv_namespaces]]
+binding = "WEB_CACHE_INDEX"
+id = "4dbeee0a3777460a97ebabf62027ada6"  # ganti dengan ID KV namespace milikmu
