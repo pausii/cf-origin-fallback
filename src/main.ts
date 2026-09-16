@@ -122,6 +122,11 @@ async function saveToKV(env: Env, cfg: Config, key: string, request: Request, re
                 url: request.url,           // URL asli (key hanya path, jadi ini buat referensi)
                 savedAt: new Date().toISOString(),
                 size: body.length,
+                // pengunjung yang memicu simpan; country dari geo Cloudflare, null kalau dijalankan di luar CF (wrangler dev)
+                client: {
+                    ip: request.headers.get("cf-connecting-ip"),
+                    country: (request.cf as IncomingRequestCfProperties | undefined)?.country ?? null
+                },
                 status: response.status,
                 headers,
                 body
